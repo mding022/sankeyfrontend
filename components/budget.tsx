@@ -69,15 +69,14 @@ export default function Budget() {
       })
 
       if (response.ok) {
-        const result = await response.text();
-        const imageResponse = await fetch(result);
-
-        if (imageResponse.ok) {
-          const blob = await imageResponse.blob();
-          const imageUrl = URL.createObjectURL(blob);
-          setImageUrl(imageUrl);
-          setLoading(false);
-        }
+        const result = await response.text()
+        setTimeout(() => {
+          setImageUrl(result)
+          setLoading(false)
+        }, 1000)
+      } else {
+        console.error('Failed to send data:', response.statusText)
+        setLoading(false)
       }
     } catch (error) {
       console.error('Error during submission:', error)
