@@ -61,7 +61,7 @@ export default function Budget() {
 
     try {
       //Temporary ngrok link until I get a dedicated server
-      const response = await fetch('https://https://ee24-137-122-64-219.ngrok-free.app/build', {
+      const response = await fetch('https://ee24-137-122-64-219.ngrok-free.app/build', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
