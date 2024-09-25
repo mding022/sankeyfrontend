@@ -73,7 +73,7 @@ export default function Budget() {
         setTimeout(() => {
           setImageUrl(result)
           setLoading(false)
-        }, 1000)
+        }, 2500)
       } else {
         console.error('Failed to send data:', response.statusText)
         setLoading(false)
