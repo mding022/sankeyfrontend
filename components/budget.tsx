@@ -121,7 +121,7 @@ export default function Budget() {
         <Card className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border-none shadow-xl flex flex-col">
           <CardHeader>
             <h1 className="text-2xl font-black bg-gradient-to-r from-purple-700 to-pink-500 text-transparent bg-clip-text">
-              Budget
+              Data
             </h1>
           </CardHeader>
           <CardContent className="flex-grow overflow-auto">
