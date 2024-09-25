@@ -60,8 +60,7 @@ export default function Budget() {
     })
 
     try {
-      //Temporary ngrok link until I get a dedicated server
-      const response = await fetch('https://ee24-137-122-64-219.ngrok-free.app/build', {
+      const response = await fetch('https://api.millerding.com/build', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -70,14 +69,15 @@ export default function Budget() {
       })
 
       if (response.ok) {
-        const result = await response.text()
-        setTimeout(() => {
-          setImageUrl(result)
-          setLoading(false)
-        }, 3500)
-      } else {
-        console.error('Failed to send data:', response.statusText)
-        setLoading(false)
+        const result = await response.text();
+        const imageResponse = await fetch(result);
+
+        if (imageResponse.ok) {
+          const blob = await imageResponse.blob();
+          const imageUrl = URL.createObjectURL(blob);
+          setImageUrl(imageUrl);
+          setLoading(false);
+        }
       }
     } catch (error) {
       console.error('Error during submission:', error)
