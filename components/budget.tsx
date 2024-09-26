@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { PlusIcon, MinusIcon } from 'lucide-react'
+import { MinusIcon } from 'lucide-react'
 
 interface BudgetItem {
   name: string
@@ -148,7 +148,7 @@ export default function Budget() {
   const renderFields = (type: budgetField, items: BudgetItem[]) => (
     <>
       {items.map((item, index) => (
-        <div key={index} className="flex space-x-2 mb-2">
+        <div key={index} className="flex space-x-2">
           <Input
             placeholder="Name"
             value={item.name}
@@ -169,9 +169,7 @@ export default function Budget() {
           )}
         </div>
       ))}
-      <Button type="button" variant="ghost" size="sm" onClick={() => addField(type)} className="text-gray-400 hover:bg-gray-300 hover:bg-opacity-5 hover:text-purple-900">
-        <PlusIcon className="h-4 w-4 mr-2" /> Add {type == 'costofrevenue' ? 'cost of revenue' : type}
-      </Button>
+      <button role="link" onClick={() => addField(type)} className ="text-xs text-gray-500 relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-left after:scale-x-100 after:bg-gray-500 after:transition-transform after:duration-150 after:ease-in-out hover:after:origin-bottom-right hover:after:scale-x-0">Add {type == 'costofrevenue' ? 'cost of revenue' : type}</button>
     </>
   )
 
@@ -197,11 +195,11 @@ export default function Budget() {
             </h1>
           </CardHeader>
           <CardContent className="flex-grow overflow-auto">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-2">
               {sankeyType === 'personal' ? (
                 <>
                   <div className="animate-fade-in">
-                    <div>
+                    <div className="mb-2">
                       <h3 className="text-lg font-medium mb-2 text-gray-700">Incomes</h3>
                       {renderFields('income', incomes)}
                     </div>
@@ -214,19 +212,19 @@ export default function Budget() {
               ) : sankeyType === 'business' ? (
                 <>
                   <div className="animate-fade-in">
-                    <div>
+                    <div className="mb-2">
                       <h3 className="text-lg font-medium mb-2 text-gray-700">Revenue</h3>
                       {renderFields('revenue', revenue)}
                     </div>
-                    <div>
+                    <div className="mb-2">
                       <h3 className="text-lg font-medium mb-2 text-gray-700">Cost of Revenue</h3>
                       {renderFields('costofrevenue', costOfRevenue)}
                     </div>
-                    <div>
+                    <div className="mb-2">
                       <h3 className="text-lg font-medium mb-2 text-gray-700">Operating Expenses</h3>
                       {renderFields('opex', opex)}
                     </div>
-                    <div>
+                    <div className="mb-2">
                       <h3 className="text-lg font-medium mb-2 text-gray-700">Taxes</h3>
                       {renderFields('taxes', taxes)}
                     </div>
