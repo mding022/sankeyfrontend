@@ -231,7 +231,7 @@ export default function Budget() {
               ) : sankeyType === 'company' ? (
                 <>
                   <div>
-                    <h3 className="text-lg font-medium mb-2 text-gray-700">Company Specific Fields</h3>
+                  {/*placeholder*/}
                   </div>
                 </>
               ) : null}
