@@ -135,7 +135,7 @@ export default function Budget() {
         setTimeout(() => {
           setImageUrl(result)
           setLoading(false)
-        }, 2500)
+        }, 1000)
       } else {
         setLoading(false)
       }
