@@ -62,7 +62,7 @@
 }
 
 .animate-fade-in-graph {
-  animation: fadeIn 1800ms ease-out;
+  animation: fadeIn 500ms ease-in;
 }
 
 @layer utilities {
