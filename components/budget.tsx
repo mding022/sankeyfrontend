@@ -60,7 +60,7 @@ export default function Budget() {
     })
 
     try {
-      const response = await fetch('https://api.millerding.com/build', {
+      const response = await fetch('https://api.millerding.com/build/budget', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
