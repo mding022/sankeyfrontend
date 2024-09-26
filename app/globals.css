@@ -61,6 +61,10 @@
   animation: fadeInDots 800ms ease-out;
 }
 
+.animate-fade-in-graph {
+  animation: fadeIn 1800ms ease-out;
+}
+
 @layer utilities {
   .animate-ping-once {
     @apply animate-ping; /* Apply the base ping animation */

@@ -171,12 +171,18 @@ export default function Budget() {
             </h1>
           </CardHeader>
           <CardContent className="flex-grow flex items-center justify-center">
-            {imageUrl ? (
-              <img src={imageUrl} alt="Generated Budget" className="object-contain w-full h-full" />
+            {imageUrl != null ? (
+              <img
+                src={imageUrl}
+                alt="Budget visualization"
+                width={300}
+                height={300}
+                className="rounded-lg object-cover max-w-full max-h-full animate-fade-in-graph"
+              />
             ) : (
-              <div className="text-center text-gray-700">
-                {loading ? 'Loading...' : 'Submit to see the result.'}
-              </div>
+              <p className="text-gray-400 text-center">
+                Generated budget diagrams will appear here!
+              </p>
             )}
           </CardContent>
         </Card>
