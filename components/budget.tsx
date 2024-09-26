@@ -169,8 +169,8 @@ export default function Budget() {
           )}
         </div>
       ))}
-      <Button type="button" variant="ghost" size="sm" onClick={() => addField(type)} className="hover:bg-gray-300 hover:bg-opacity-5 hover:text-purple-900">
-        <PlusIcon className="h-4 w-4 mr-2" /> Add {type=='costofrevenue'?'cost of revenue':type}
+      <Button type="button" variant="ghost" size="sm" onClick={() => addField(type)} className="text-gray-400 hover:bg-gray-300 hover:bg-opacity-5 hover:text-purple-900">
+        <PlusIcon className="h-4 w-4 mr-2" /> Add {type == 'costofrevenue' ? 'cost of revenue' : type}
       </Button>
     </>
   )
@@ -200,38 +200,42 @@ export default function Budget() {
             <form onSubmit={handleSubmit} className="space-y-6">
               {sankeyType === 'personal' ? (
                 <>
-                  <div>
-                    <h3 className="text-lg font-medium mb-2 text-gray-700">Incomes</h3>
-                    {renderFields('income', incomes)}
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-medium mb-2 text-gray-700">Expenditures</h3>
-                    {renderFields('expenditure', expenditures)}
+                  <div className="animate-fade-in">
+                    <div>
+                      <h3 className="text-lg font-medium mb-2 text-gray-700">Incomes</h3>
+                      {renderFields('income', incomes)}
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-medium mb-2 text-gray-700">Expenditures</h3>
+                      {renderFields('expenditure', expenditures)}
+                    </div>
                   </div>
                 </>
               ) : sankeyType === 'business' ? (
                 <>
-                  <div>
-                    <h3 className="text-lg font-medium mb-2 text-gray-700">Revenue</h3>
-                    {renderFields('revenue', revenue)}
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-medium mb-2 text-gray-700">Cost of Revenue</h3>
-                    {renderFields('costofrevenue', costOfRevenue)}
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-medium mb-2 text-gray-700">Operating Expenses</h3>
-                    {renderFields('opex', opex)}
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-medium mb-2 text-gray-700">Taxes</h3>
-                    {renderFields('taxes', taxes)}
+                  <div className="animate-fade-in">
+                    <div>
+                      <h3 className="text-lg font-medium mb-2 text-gray-700">Revenue</h3>
+                      {renderFields('revenue', revenue)}
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-medium mb-2 text-gray-700">Cost of Revenue</h3>
+                      {renderFields('costofrevenue', costOfRevenue)}
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-medium mb-2 text-gray-700">Operating Expenses</h3>
+                      {renderFields('opex', opex)}
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-medium mb-2 text-gray-700">Taxes</h3>
+                      {renderFields('taxes', taxes)}
+                    </div>
                   </div>
                 </>
               ) : sankeyType === 'company' ? (
                 <>
                   <div>
-                  {/*placeholder*/}
+                    {/*placeholder*/}
                   </div>
                 </>
               ) : null}
