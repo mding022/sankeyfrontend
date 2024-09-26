@@ -12,45 +12,104 @@ interface BudgetItem {
 }
 
 type sankeyType = 'personal' | 'business' | 'company'
+type budgetField = 'income' | 'expenditure' | 'revenue' | 'costofrevenue' | 'opex' | 'taxes'
 
 export default function Budget() {
   const [incomes, setIncomes] = useState<BudgetItem[]>([{ name: '', amount: '' }])
   const [expenditures, setExpenditures] = useState<BudgetItem[]>([{ name: '', amount: '' }])
+  const [revenue, setRevenue] = useState<BudgetItem[]>([{ name: '', amount: '' }])
+  const [costOfRevenue, setCostOfRevenue] = useState<BudgetItem[]>([{ name: '', amount: '' }])
+  const [opex, setOpex] = useState<BudgetItem[]>([{ name: '', amount: '' }])
+  const [taxes, setTaxes] = useState<BudgetItem[]>([{ name: '', amount: '' }])
   const [imageUrl, setImageUrl] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [sankeyType, setSankeyType] = useState<sankeyType>('personal')
 
-  const addField = (type: 'income' | 'expenditure') => {
-    if (type === 'income') {
-      setIncomes([...incomes, { name: '', amount: '' }])
-    } else {
-      setExpenditures([...expenditures, { name: '', amount: '' }])
+  const addField = (type: budgetField) => {
+    switch (type) {
+      case 'income':
+        setIncomes([...incomes, { name: '', amount: '' }])
+        break
+      case 'expenditure':
+        setExpenditures([...expenditures, { name: '', amount: '' }])
+        break
+      case 'revenue':
+        setRevenue([...revenue, { name: '', amount: '' }])
+        break
+      case 'costofrevenue':
+        setCostOfRevenue([...costOfRevenue, { name: '', amount: '' }])
+        break
+      case 'opex':
+        setOpex([...opex, { name: '', amount: '' }])
+        break
+      case 'taxes':
+        setTaxes([...taxes, { name: '', amount: '' }])
+        break
     }
   }
 
-  const removeField = (type: 'income' | 'expenditure', index: number) => {
-    if (type === 'income') {
-      setIncomes(incomes.filter((_, i) => i !== index))
-    } else {
-      setExpenditures(expenditures.filter((_, i) => i !== index))
+  const removeField = (type: budgetField, index: number) => {
+    switch (type) {
+      case 'income':
+        setIncomes(incomes.filter((_, i) => i !== index))
+        break
+      case 'expenditure':
+        setExpenditures(expenditures.filter((_, i) => i !== index))
+        break
+      case 'revenue':
+        setRevenue(revenue.filter((_, i) => i !== index))
+        break
+      case 'costofrevenue':
+        setCostOfRevenue(costOfRevenue.filter((_, i) => i !== index))
+        break
+      case 'opex':
+        setOpex(opex.filter((_, i) => i !== index))
+        break
+      case 'taxes':
+        setTaxes(taxes.filter((_, i) => i !== index))
+        break
     }
   }
 
-  const updateField = (type: 'income' | 'expenditure', index: number, field: 'name' | 'amount', value: string) => {
-    if (type === 'income') {
-      const newIncomes = [...incomes]
-      newIncomes[index][field] = value
-      setIncomes(newIncomes)
-    } else {
-      const newExpenditures = [...expenditures]
-      newExpenditures[index][field] = value
-      setExpenditures(newExpenditures)
+  const updateField = (type: budgetField, index: number, field: 'name' | 'amount', value: string) => {
+    switch (type) {
+      case 'income':
+        const newIncomes = [...incomes]
+        newIncomes[index][field] = value
+        setIncomes(newIncomes)
+        break
+      case 'expenditure':
+        const newExpenditures = [...expenditures]
+        newExpenditures[index][field] = value
+        setExpenditures(newExpenditures)
+        break
+      case 'revenue':
+        const newRevenue = [...revenue]
+        newRevenue[index][field] = value
+        setRevenue(newRevenue)
+        break
+      case 'costofrevenue':
+        const newCostOfRevenue = [...costOfRevenue]
+        newCostOfRevenue[index][field] = value
+        setCostOfRevenue(newCostOfRevenue)
+        break
+      case 'opex':
+        const newOpex = [...opex]
+        newOpex[index][field] = value
+        setOpex(newOpex)
+        break
+      case 'taxes':
+        const newTaxes = [...taxes]
+        newTaxes[index][field] = value
+        setTaxes(newTaxes)
+        break
     }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
+    setImageUrl(null)
     const incomeAmounts = incomes.map((item) => item.amount).join(',')
     const incomeLabels = incomes.map((item) => item.name).join(',')
     const expenditureAmounts = expenditures.map((item) => item.amount).join(',')
@@ -78,16 +137,15 @@ export default function Budget() {
           setLoading(false)
         }, 2500)
       } else {
-        console.error('Failed to send data:', response.statusText)
         setLoading(false)
       }
     } catch (error) {
-      console.error('Error during submission:', error)
+      console.log(error)
       setLoading(false)
     }
   }
 
-  const renderFields = (type: 'income' | 'expenditure', items: BudgetItem[]) => (
+  const renderFields = (type: budgetField, items: BudgetItem[]) => (
     <>
       {items.map((item, index) => (
         <div key={index} className="flex space-x-2 mb-2">
@@ -112,7 +170,7 @@ export default function Budget() {
         </div>
       ))}
       <Button type="button" variant="ghost" size="sm" onClick={() => addField(type)} className="hover:bg-gray-300 hover:bg-opacity-5 hover:text-purple-900">
-        <PlusIcon className="h-4 w-4 mr-2" /> Add {type}
+        <PlusIcon className="h-4 w-4 mr-2" /> Add {type=='costofrevenue'?'cost of revenue':type}
       </Button>
     </>
   )
@@ -121,6 +179,10 @@ export default function Budget() {
     setSankeyType(type)
     setIncomes([{ name: '', amount: '' }])
     setExpenditures([{ name: '', amount: '' }])
+    setRevenue([{ name: '', amount: '' }])
+    setCostOfRevenue([{ name: '', amount: '' }])
+    setOpex([{ name: '', amount: '' }])
+    setTaxes([{ name: '', amount: '' }])
     setImageUrl(null)
   }
 
@@ -131,19 +193,48 @@ export default function Budget() {
         <Card className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border-none shadow-xl flex flex-col">
           <CardHeader>
             <h1 className="text-2xl font-black bg-gradient-to-r from-purple-700 to-pink-500 text-transparent bg-clip-text">
-              Data-{sankeyType}
+              Data
             </h1>
           </CardHeader>
           <CardContent className="flex-grow overflow-auto">
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <h3 className="text-lg font-medium mb-2 text-gray-700">Incomes</h3>
-                {renderFields('income', incomes)}
-              </div>
-              <div>
-                <h3 className="text-lg font-medium mb-2 text-gray-700">Expenditures</h3>
-                {renderFields('expenditure', expenditures)}
-              </div>
+              {sankeyType === 'personal' ? (
+                <>
+                  <div>
+                    <h3 className="text-lg font-medium mb-2 text-gray-700">Incomes</h3>
+                    {renderFields('income', incomes)}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium mb-2 text-gray-700">Expenditures</h3>
+                    {renderFields('expenditure', expenditures)}
+                  </div>
+                </>
+              ) : sankeyType === 'business' ? (
+                <>
+                  <div>
+                    <h3 className="text-lg font-medium mb-2 text-gray-700">Revenue</h3>
+                    {renderFields('revenue', revenue)}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium mb-2 text-gray-700">Cost of Revenue</h3>
+                    {renderFields('costofrevenue', costOfRevenue)}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium mb-2 text-gray-700">Operating Expenses</h3>
+                    {renderFields('opex', opex)}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium mb-2 text-gray-700">Taxes</h3>
+                    {renderFields('taxes', taxes)}
+                  </div>
+                </>
+              ) : sankeyType === 'company' ? (
+                <>
+                  <div>
+                    <h3 className="text-lg font-medium mb-2 text-gray-700">Company Specific Fields</h3>
+                  </div>
+                </>
+              ) : null}
             </form>
           </CardContent>
           <CardFooter>
@@ -189,7 +280,7 @@ export default function Budget() {
         <div className="col-span-1 lg:col-span-2 flex justify-center space-x-4 font-extrabold">
           <button onClick={() => changesankeyType('personal')} className="relative min-h-10 rounded bg-white px-3 py-1.5 text-purple-800 transition-all duration-300 hover:bg-gray-100 hover:ring-2 hover:ring-purple-700 hover:ring-offset-2"><span className="relative">Personal Budget</span></button>
           <button onClick={() => changesankeyType('business')} className="relative min-h-10 rounded bg-white px-3 py-1.5 text-purple-800 transition-all duration-300 hover:bg-gray-100 hover:ring-2 hover:ring-purple-700 hover:ring-offset-2"><span className="relative">Business Cashflow</span></button>
-          <button onClick={() => changesankeyType('company')} className="relative min-h-10 rounded bg-white px-3 py-1.5 text-purple-800 transition-all duration-300 hover:bg-gray-100 hover:ring-2 hover:ring-purple-700 hover:ring-offset-2"><span className="relative">Company Financials</span></button>
+          {/*<button onClick={() => changesankeyType('company')} className="relative min-h-10 rounded bg-white px-3 py-1.5 text-purple-800 transition-all duration-300 hover:bg-gray-100 hover:ring-2 hover:ring-purple-700 hover:ring-offset-2"><span className="relative">Company Financials</span></button>*/}
         </div>
       </div>
     </div>
