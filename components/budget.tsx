@@ -169,7 +169,7 @@ export default function Budget() {
           )}
         </div>
       ))}
-      <button role="link" onClick={() => addField(type)} className ="text-xs text-gray-500 relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-left after:scale-x-100 after:bg-gray-500 after:transition-transform after:duration-150 after:ease-in-out hover:after:origin-bottom-right hover:after:scale-x-0">Add {type == 'costofrevenue' ? 'cost of revenue' : type}</button>
+      <button role="link" onClick={(e) => {e.preventDefault();addField(type);}} className ="text-xs text-gray-500 relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-left after:scale-x-100 after:bg-gray-500 after:transition-transform after:duration-150 after:ease-in-out hover:after:origin-bottom-right hover:after:scale-x-0">Add {type == 'costofrevenue' ? 'cost of revenue' : type}</button>
     </>
   )
 
@@ -200,11 +200,11 @@ export default function Budget() {
                 <>
                   <div className="animate-fade-in">
                     <div className="mb-2">
-                      <h3 className="text-lg font-medium mb-2 text-gray-700">Incomes</h3>
+                      <h3 className="text-lg font-medium mb-2 text-green-900">Incomes</h3>
                       {renderFields('income', incomes)}
                     </div>
                     <div>
-                      <h3 className="text-lg font-medium mb-2 text-gray-700">Expenditures</h3>
+                      <h3 className="text-lg font-medium mb-2 text-pink-900">Expenditures</h3>
                       {renderFields('expenditure', expenditures)}
                     </div>
                   </div>
@@ -213,19 +213,19 @@ export default function Budget() {
                 <>
                   <div className="animate-fade-in">
                     <div className="mb-2">
-                      <h3 className="text-lg font-medium mb-2 text-gray-700">Revenue</h3>
+                      <h3 className="text-lg font-medium mb-2 text-green-900">Revenue</h3>
                       {renderFields('revenue', revenue)}
                     </div>
                     <div className="mb-2">
-                      <h3 className="text-lg font-medium mb-2 text-gray-700">Cost of Revenue</h3>
+                      <h3 className="text-lg font-medium mb-2 text-pink-900">Cost of Revenue</h3>
                       {renderFields('costofrevenue', costOfRevenue)}
                     </div>
                     <div className="mb-2">
-                      <h3 className="text-lg font-medium mb-2 text-gray-700">Operating Expenses</h3>
+                      <h3 className="text-lg font-medium mb-2 text-pink-900">Operating Expenses</h3>
                       {renderFields('opex', opex)}
                     </div>
                     <div className="mb-2">
-                      <h3 className="text-lg font-medium mb-2 text-gray-700">Taxes</h3>
+                      <h3 className="text-lg font-medium mb-2 text-pink-900">Taxes</h3>
                       {renderFields('taxes', taxes)}
                     </div>
                   </div>
