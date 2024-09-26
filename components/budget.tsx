@@ -11,7 +11,7 @@ interface BudgetItem {
   amount: string
 }
 
-type sankeyType = 'personal' | 'business' | 'project'
+type sankeyType = 'personal' | 'business' | 'company'
 
 export default function Budget() {
   const [incomes, setIncomes] = useState<BudgetItem[]>([{ name: '', amount: '' }])
@@ -180,33 +180,10 @@ export default function Budget() {
             )}
           </CardContent>
         </Card>
-        <div className="col-span-1 lg:col-span-2 flex justify-center space-x-4">
-          <button
-            onClick={() => changesankeyType('personal')}
-            className="relative inline-block font-medium group py-1.5 px-2.5"
-          >
-            <span className="absolute inset-0 w-full h-full transition duration-400 ease-out transform translate-x-1 translate-y-1 bg-purple-800 group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
-            <span className="absolute inset-0 w-full h-full bg-white border border-purple-900 group-hover:bg-indigo-50"></span>
-            <span className="relative text-purple-800">Personal Budget</span>
-          </button>
-
-          <button
-            onClick={() => changesankeyType('business')}
-            className="relative inline-block font-medium group py-1.5 px-2.5"
-          >
-            <span className="absolute inset-0 w-full h-full transition duration-400 ease-out transform translate-x-1 translate-y-1 bg-purple-800 group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
-            <span className="absolute inset-0 w-full h-full bg-white border border-purple-900 group-hover:bg-indigo-50"></span>
-            <span className="relative text-purple-800">Business Budget</span>
-          </button>
-
-          <button
-            onClick={() => changesankeyType('project')}
-            className="relative inline-block font-medium group py-1.5 px-2.5"
-          >
-            <span className="absolute inset-0 w-full h-full transition duration-400 ease-out transform translate-x-1 translate-y-1 bg-purple-800 group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
-            <span className="absolute inset-0 w-full h-full bg-white border border-purple-900 group-hover:bg-indigo-50"></span>
-            <span className="relative text-purple-800">Project Budget</span>
-          </button>
+        <div className="col-span-1 lg:col-span-2 flex justify-center space-x-4 font-extrabold">
+          <button onClick={() => changesankeyType('personal')} className="relative min-h-10 rounded bg-white px-3 py-1.5 text-purple-800 transition-all duration-300 hover:bg-gray-100 hover:ring-2 hover:ring-purple-700 hover:ring-offset-2"><span className="relative">Personal Budget</span></button>
+          <button onClick={() => changesankeyType('business')} className="relative min-h-10 rounded bg-white px-3 py-1.5 text-purple-800 transition-all duration-300 hover:bg-gray-100 hover:ring-2 hover:ring-purple-700 hover:ring-offset-2"><span className="relative">Business Cashflow</span></button>
+          <button onClick={() => changesankeyType('company')} className="relative min-h-10 rounded bg-white px-3 py-1.5 text-purple-800 transition-all duration-300 hover:bg-gray-100 hover:ring-2 hover:ring-purple-700 hover:ring-offset-2"><span className="relative">Company Financials</span></button>
         </div>
       </div>
     </div>
