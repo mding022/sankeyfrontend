@@ -1,8 +1,8 @@
 # Front end for my Sankey Diagrams creator
 
-Access this at [chart.millerding.com](https://chart.millerding.com)
+Try creating something at [chart.millerding.com](https://chart.millerding.com)
 
-# Usage
+#### Usage
 
 Here is an example from the site:
 ![Example](example.png)
